@@ -24,6 +24,6 @@ jobs:
         CLIENT_SECRET: ${{ secrets.client_secret }}
       id: xray-token
       run: |
-        echo ::set-output name=XRAY_TOKEN::$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\": \"$CLIENT_ID\",\"client_secret\": \"$CLIENT_SECRET\" }" https://xray.cloud.getxray.app/api/v1/authenticate| tr -d '"')
+        echo ::set-output name=XRAY_TOKEN::$(curl -H "Content-Type: application/json" -X POST --data "{ \"900B22C467CC477CB08A3477A2DB4E6B\": \"$CLIENT_ID\",\"39eeee67a4c24879162a6f355dd772833e4e63fdfccec53ee490bddf697b4b78\": \"$CLIENT_SECRET\" }" https://xray.cloud.getxray.app/api/v1/authenticate| tr -d '"')
     - name: Submit results to Xray
-      run: 'curl -H "Content-Type: text/xml" -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" --data @target/surefire-reports/TEST-com.xpand.java.CalcTest.xml  "https://xray.cloud.getxray.app/api/v2/import/execution/junit?projectKey=CALC"'
+      run: 'curl -H "Content-Type: text/xml" -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" --data @target/surefire-reports/TEST-com.xpand.java.CalcTest.xml  "https://xray.cloud.getxray.app/api/v2/import/execution/junit?projectKey=XA"'
